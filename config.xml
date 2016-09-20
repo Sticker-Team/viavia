@@ -3,7 +3,7 @@
   <description>A cool guide for cool kids</description>
   <icon src="www/images/viavia_logo.png"/>
   <author href="" email="teamsticker@gmail.com">Team Sticker</author>
-  <content src="www/index.html"/>
+  <content src="index.html"/>
   <access origin="*"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
