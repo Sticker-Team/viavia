@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Whack-A-Bug</title>
 	<link rel="stylesheet" type="text/css" href="css/wack/style.css"/>
-	<script type="text/javascript" charset="utf-8" src="js/pg-plugin-screen-orientation.js"> navigator.screenOrientation.set('landscape'); </script>
+	<script type="text/javascript" charset="utf-8" src="js/pg-plugin-screen-orientation.js"> </script>
 </head>
 <body>
 	<div class="wrapper">
@@ -20,5 +20,6 @@
 			
 		}
 	</script>
+	<input type="button" onclick="navigator.screenOrientation.set('portrait');return false;" value="Portrait" />
 </body>
 </html>
