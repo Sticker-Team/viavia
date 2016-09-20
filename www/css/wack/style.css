@@ -25,8 +25,8 @@ p {
 
 #wam-game {
 	background: #78b73b;
-	height: 210px;
-	width: 500px;
+	height: 100%;
+	width: 100%;
 	display: block;
 	margin: auto auto;
 	border: 1px solid #3b5a1d;
