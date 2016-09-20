@@ -1,0 +1,34 @@
+* 
+{
+    margin: 0; 
+    padding: 0; 
+    z-index: 0;
+}
+
+canvas 
+{ 
+    display: block; 
+    background-image: url("images/paddyimg/1.PNG");
+    background-color: #F8FAF7;
+    z-index: 0;
+}
+
+html
+{
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+body
+{
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+#tram
+{
+   float: top;
+   z-index: 1;
+}

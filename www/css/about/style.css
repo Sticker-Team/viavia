@@ -1,0 +1,98 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-Sep-2016, 15:42:17
+    Author     : Sean
+*/
+
+p
+    {
+        
+    font-family: 'impact', Arial, Verdana, sans-serif;
+    position: relative;
+    top: 100px;
+    background-color: white;
+    border-style: ridge;
+    border-color: brown;
+    color: black;
+    }
+
+.menu ul
+{
+    
+    top:150px;
+    left: 50px;
+    width: 150px;
+    border-radius: 25px;
+    position: relative;
+    list-style : none;  /* Remove the bullet from list items */
+    padding    : 0px;   /* Remove default padding from list items */
+    margin     : 0px;   /* Remove default margin from list items */
+}
+
+h1
+{
+    
+    left: 55px;
+    border-radius: 25px;
+    position: fixed;
+    background-color: white;
+    border-style: ridge;
+    border-color: brown;
+    color: black;
+}
+img
+{
+    position: relative;
+    left: 100px;
+}
+.menu li
+{
+    top:100px;
+    border-radius: 50px;
+    width      : 200px;    /* width for each list item. Not absolutely necessary for horizontal menus. */
+    font-family: 'impact', Arial, Verdana, sans-serif;
+    text-align : center;
+    /* Not needed for either menu. */
+}
+body                		
+{	background-image: url(../../images/MENU.jpg);
+    background-size: cover;
+}
+.menu a,
+.menu span
+{
+    
+    top:100px;
+    border-radius: 25px;
+    border: solid;
+    border-color: brown;
+    font-size: 25px;
+    text-decoration  : none;    /* remove the underline from a menu */ 
+    color            : black; 
+    background-color : white;
+    display          : block;   /* Expand hyperlink to fill container*/
+}
+
+.menu a:hover,
+.menu a:active,
+.menu span:hover
+{
+    color            : white;
+    background-color : black;
+    cursor: pointer;
+}
+
+.menu.horizontal li
+{
+    display : inline-block;  /* Force list items onto same line. */
+    float   : left;          /* Force list items tight together. */
+}
+.locked
+{
+    color            : #aaa;
+    background-color : #ddd;
+}

@@ -1,0 +1,201 @@
+<html>
+
+    <head>
+
+        <script type="text/javascript" src = "Scripts/jquery.js"></script>
+
+        <!--<script type="text/javascript" src = "Scripts/FindTarget.js"></script>-->
+        <!--<script type="text/javascript" src = "Scripts/Colors.js"></script>-->
+        <script type="text/javascript" src = "js/paddy/try.js"></script>
+
+        <script type="text/javascript" src = "js/paddy/viavia.js"></script>
+        <link rel = "stylesheet" href = "css/paddy/special.css" type = "text/css">
+
+
+
+
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function ()
+            {
+                sendData(level);
+                //$.ajax("abc");
+                var canvas = $('<canvas/>').attr({width: cWidth, height: cHeight}).appendTo('body');
+                var context = canvas.get(0).getContext("2d");
+                var nodeColor = "white", brokenPathColor = "white";
+                var selectedNode = false;
+                var lastTile = {row: -1, column: -1}, currTile = {row: -1, column: -1};
+                var paths = new Object();
+                var broken = false;
+
+                drawBoard(context);
+                //drawCircle(context, "red", 5, 6);
+                drawLevel(context);
+
+                $(canvas).click(function (a)
+                {
+                    //console.log((a.pageX - p) + " "+  (a.pageY - p));
+                    //console.log(bWidth + " " + bHeight);
+                    console.log(level);
+                    currTile = getClickedTile(a.pageX, a.pageY);
+                    lastTile = currTile;
+                    //console.log([level[currTile.row][currTile.column]]);
+
+                    if (level[currTile.row][currTile.column].type === "broken" || level[currTile.row][currTile.column].type === "broken node")
+                    {
+                        console.log("woohoo");
+                        selectedNode = true;
+                        nodeColor = level[currTile.row][currTile.column].color;
+                        context.fillStyle = "black";
+                        context.fillRect((currTile.column - 1) * bWidth + 1, (currTile.row - 1) * bHeight + 1, bWidth - 1, bHeight - 1);
+                        console.log(level[currTile.row][currTile.column].type + "ok");
+
+                        if (level[currTile.row][currTile.column].type === "broken node")
+                        {
+                            drawCircle(context, level[currTile.row][currTile.column].color, currTile.row, currTile.column);
+                            level[currTile.row][currTile.column].type = "node";
+                        } else
+                            level[currTile.row][currTile.column].type = "path";
+                        paths[nodeColor].drawPath(context, currTile, true);
+
+                    } else if (level[currTile.row][currTile.column].type === "node" && !paths[level[currTile.row][currTile.column].color])
+                    {
+                        nodeColor = level[currTile.row][currTile.column].color;
+                        paths[nodeColor] = new Path(currTile, findTarget(currTile), nodeColor);
+                        selectedNode = true;
+                        startTile = currTile;
+                        console.log("hmm. so it begins");
+                    }
+                    //drawCircle(context, "red", tile.row, tile.column);
+                });
+
+                $(canvas).mousemove(function (a)
+                {
+                    currTile = getClickedTile(a.pageX, a.pageY);
+                    //console.log(level);
+                    //console.log((Math.abs(currTile.row - lastTile.row) <=1) + " " + currTile.row +"'" + lastTile.row);// && Math.abs(currTile.column - lastTile.column) <= 1) ); 
+                    //&& (level[currTile.row][currTile.column].type == "path" || level[currTile.row][currTile.column].type == "broken")//Handles breaking of other paths
+                    //&& level[currTile.row][currTile.column].color != nodeColor
+                    //&& (Math.abs(currTile.row - lastTile.row) <=1 && Math.abs(currTile.column - lastTile.column) <= 1) 
+                    //&& (!(currTile.row - lastTile.row) || !(currTile.column - lastTile.column)) && !broken);
+                    //console.log(level[currTile.row][currTile.column].type == "path"); //Handles breaking of other paths
+                    //&& level[currTile.row][currTile.column].color != nodeColor
+                    //&& (Math.abs(currTile.row - lastTile.row) <=1 && Math.abs(currTile.column - lastTile.column) <= 1) 
+                    //	&& (!(currTile.row - lastTile.row) || !(currTile.column - lastTile.column)) && !broken);
+
+
+                    if ((selectedNode) && (level[currTile.row][currTile.column].color == nodeColor && level[currTile.row][currTile.column].type == "node")
+                            && (currTile.row != startTile.row || currTile.column != startTile.column) //Checks if target has been reached 
+                            && (Math.abs(currTile.row - lastTile.row) <= 1 && Math.abs(currTile.column - lastTile.column) <= 1) //To prevent "jumps"
+                            && (!(currTile.row - lastTile.row) || !(currTile.column - lastTile.column)))//To prevent diagonal moves
+                    {
+                        console.log("wtf. reached");
+                        selectedNode = false;
+                        paths[nodeColor].drawPath(context, currTile);
+                        nodeColor = "";
+                        broken = false;
+                        var complete = true, i = 0;
+
+                        if (checkComplete(level, paths))
+                            document.location = "./guessingGame/gg.html";
+                    } else if (selectedNode && (currTile.row != lastTile.row || currTile.column != lastTile.column)
+                            && (level[currTile.row][currTile.column].type == "path" || level[currTile.row][currTile.column].type == "broken")//Handles breaking of other paths
+                            && level[currTile.row][currTile.column].color != nodeColor
+                            && (Math.abs(currTile.row - lastTile.row) <= 1 && Math.abs(currTile.column - lastTile.column) <= 1)
+                            && (!(currTile.row - lastTile.row) || !(currTile.column - lastTile.column)) && !broken)
+                    {
+                        //console.log(level[currTile.row][currTile.column] + "," + colors[nodeColor]);
+                        brokenPathColor = level[currTile.row][currTile.column].color;
+                        //console.log(brokenPathColor);
+                        paths[brokenPathColor].breakPath(context, currTile, paths[brokenPathColor]);
+                        //paths[nodeColor].drawPath(context, currTile);
+                        //lastTile = currTile;
+                        broken = true;
+                        console.log("broken");
+                    } else if (selectedNode && (currTile.row !== lastTile.row || currTile.column !== lastTile.column) && !level[currTile.row][currTile.column].type
+                            && (Math.abs(currTile.row - lastTile.row) <= 1 && Math.abs(currTile.column - lastTile.column) <= 1)
+                            && (!(currTile.row - lastTile.row) || !(currTile.column - lastTile.column))) //Handles normal moves
+                    {
+                        console.log("drawing");
+                        //console.log("change " + currTile.row +"," + currTile.column + " " + lastTile.row
+                        //	 + "," + lastTile.column);
+
+                        //if(currTile.row != lastTile.row && currTile.column != lastTile.column)
+                        //console.log("no its here bitch");
+                        paths[nodeColor].drawPath(context, currTile);
+                        level[currTile.row][currTile.column].color = nodeColor;
+                        level[currTile.row][currTile.column].type = "path";
+
+                        lastTile = currTile;
+                        broken = false;
+
+                        //console.log("this");
+                        //console.log(level);
+                    } else if (selectedNode)
+                    {
+                        //console.log("omfg");
+                        //console.log((currTile.column != startTile.));
+                    } else
+                    {
+                        //	console.log("if you've reached you must be dreaming. wake up");
+                    }
+
+
+
+                });
+
+                function swipedetect(el, callback) {
+
+                    var touchsurface = el,
+                            swipedir,
+                            startX,
+                            startY,
+                            distX,
+                            distY,
+                            threshold = 150, //required min distance traveled to be considered swipe
+                            restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+                            allowedTime = 300, // maximum time allowed to travel that distance
+                            elapsedTime,
+                            startTime,
+                            handleswipe = callback || function (swipedir) {}
+
+                    touchsurface.addEventListener('touchstart', function (e) {
+                        var touchobj = e.changedTouches[0]
+                        swipedir = 'none'
+                        dist = 0
+                        startX = touchobj.pageX
+                        startY = touchobj.pageY
+                        startTime = new Date().getTime() // record time when finger first makes contact with surface
+                        e.preventDefault()
+                    }, false)
+
+                    touchsurface.addEventListener('touchmove', function (e) {
+                        e.preventDefault() // prevent scrolling when inside DIV
+                    }, false)
+
+                    touchsurface.addEventListener('touchend', function (e) {
+                        var touchobj = e.changedTouches[0]
+                        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+                        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+                        elapsedTime = new Date().getTime() - startTime // get time elapsed
+                        if (elapsedTime <= allowedTime) { // first condition for awipe met
+                            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) { // 2nd condition for horizontal swipe met
+                                swipedir = (distX < 0) ? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+                            } else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint) { // 2nd condition for vertical swipe met
+                                swipedir = (distY < 0) ? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+                            }
+                        }
+                        handleswipe(swipedir)
+                        e.preventDefault()
+                    }, false)
+                }
+            });
+
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>
