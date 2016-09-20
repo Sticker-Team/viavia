@@ -128,7 +128,7 @@ var whackamole = whackamole || (function(window, undefined) {
 		
 		// the game stage
 		stage = game.stage = document.getElementById(elementId);
-		stage.style.position = "relative";
+		stage.style.position = "absolute";
 	
 		
 		stage.appendChild(ss);
