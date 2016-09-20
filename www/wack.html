@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Whack-A-Bug</title>
 	<link rel="stylesheet" type="text/css" href="css/wack/style.css"/>
+	<script type="text/javascript" charset="utf-8" src="js/pg-plugin-screen-orientation.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -12,8 +13,10 @@
 		</div>
 	<script type="text/javascript" src="js/wack/whackabug.js"></script>
 	<script type="text/javascript">
-		window.onload = function() {
+		window.onload = function() 
+		{
 			whackamole.setup("wam-game");
+			navigator.screenOrientation.set('portrait');
 		}
 	</script>
 </body>
