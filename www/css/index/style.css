@@ -44,7 +44,8 @@ img
     /* Not needed for either menu. */
 }
 body                		
-{	background-image: url(../../images/MENU.jpg);
+{	background-color: white;
+	/*background-image: url(../../images/MENU.jpg); */
     background-size: cover;
 	width: 100%;
 	height: 100%;

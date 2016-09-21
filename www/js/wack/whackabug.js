@@ -118,19 +118,16 @@ var whackamole = whackamole || (function(window, undefined) {
 		es.style.display = "none";
 		es.innerHTML = "Play again?";
 		es.onclick = function() {
-			//location.href = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
 			game.reset();
-			//game.mode = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
 			game.mode = "main"
 			this.style.display = "none";
 			game.startScreen.display = "none";
 			step();
-			
 		}
 		
 		// the game stage
 		stage = game.stage = document.getElementById(elementId);
-		stage.style.position = "absolute";
+		stage.style.position = "relative";
 	
 		
 		stage.appendChild(ss);
@@ -197,5 +194,5 @@ var whackamole = whackamole || (function(window, undefined) {
 			step();
 		}
 	};
-	
+
 })(window);
