@@ -114,14 +114,16 @@ var whackamole = whackamole || (function(window, undefined) {
 		
 		// the end screen 
 		es = game.endScreen = document.createElement("div");
-		es.className = "wam-endScreen";
+		//es.className = "wam-endScreen";
 		es.style.display = "none";
-		es.innerHTML = "Play again?";
+		//es.innerHTML = "Play again?";
 		es.onclick = function() {
+			location.href = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
 			game.reset();
-			game.mode = "main"
-			this.style.display = "none";
-			game.startScreen.display = "none";
+			//game.mode = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
+			//game.mode = "main"
+			//this.style.display = "none";
+			//game.startScreen.display = "none";
 			step();
 			
 		}

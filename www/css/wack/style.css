@@ -65,6 +65,7 @@ p {
 	font-family: arial;
 }
 .wam-startScreen {
+	position: absolute;
 	height: 100%;
 	width: 100%;
 	background: url('../../images/startScreen.png');
@@ -73,7 +74,7 @@ p {
 	z-index: 20;
 }
 .wam-endScreen {
-	position: absolute;
+	position: fixed;
 	top: 100px;
 	left: 100px;
 	height: 68px;
