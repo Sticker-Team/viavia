@@ -114,16 +114,16 @@ var whackamole = whackamole || (function(window, undefined) {
 		
 		// the end screen 
 		es = game.endScreen = document.createElement("div");
-		//es.className = "wam-endScreen";
+		es.className = "wam-endScreen";
 		es.style.display = "none";
-		//es.innerHTML = "Play again?";
+		es.innerHTML = "Play again?";
 		es.onclick = function() {
-			location.href = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
+			//location.href = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
 			game.reset();
 			//game.mode = app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka');
-			//game.mode = "main"
-			//this.style.display = "none";
-			//game.startScreen.display = "none";
+			game.mode = "main"
+			this.style.display = "none";
+			game.startScreen.display = "none";
 			step();
 			
 		}
@@ -168,8 +168,12 @@ var whackamole = whackamole || (function(window, undefined) {
 				break;
 			case "end":
 			default:
+				//window.open("https://www.google.pt/maps/search/Lodz+e+Biedronka/@51.7708469,19.4014686,12z/data=!3m1!4b1?hl=pt-PT");
+				window.location.href = "https://www.google.pt/maps/search/Lodz+e+Biedronka/@51.7708469,19.4014686,12z/data=!3m1!4b1?hl=pt-PT";
+				/*
 				game.scoreboard.innerHTML = "Final Score: " + score + "<br />Moles: " + hits + " / " + moles;
 				game.endScreen.style.display = "block";
+				*/
 				break;
 		}
 	}
