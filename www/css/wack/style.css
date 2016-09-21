@@ -2,7 +2,8 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 	height: 90%;
 	width: 70%;
-	position: relative;
+	position: absolute;
+	text-align: left;
 	
 }
 h1 {
@@ -12,12 +13,13 @@ h1 {
 }
 
 p {
-	font-size: 11px;
+	font-size: 13px;
+	
 }
 .wrapper {
 	padding: 5px;
 	background: #e1e1e1;
-	/* width: 510px; */
+	width: 510px;
 	width: 100%;
 	height: 100%;
 	margin: auto auto;
@@ -79,4 +81,20 @@ p {
 	background: url('../../images/endScreen.png');
 	text-indent: -9999px;
 	cursor: pointer;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 2s linear infinite;
+	border-width: 7px;
+	text-align: center
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

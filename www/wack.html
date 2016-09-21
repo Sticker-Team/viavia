@@ -7,8 +7,9 @@
 	<script type="text/javascript" charset="utf-8" src="js/pg-plugin-screen-orientation.js"> </script>
 </head>
 <body>
+	<p>Loading ... <div class="loader"></div></p> 
 	<div class="wrapper">
-		<!--<h1>Whack-A-Bug Game</h1>-->
+		<!--<h1>Whack-A-Bug Game</h1>--> 
 		<div id="wam-game"></div>
 		</div>
 	<script type="text/javascript" src="js/wack/whackabug.js"></script>
@@ -18,6 +19,11 @@
 			whackamole.setup("wam-game");
 		}
 	</script>
+	<input type="button" onClick="app.openNativeAppWindow('http://google.com')" value="Open Google"/>
+            <br><br><a onClick="app.openNativeAppWindow('geo://0,0?q=dallas')" data-rel="external">google maps</a>
+            <br><br><a onClick="app.openNativeAppWindow('geo:0,0?q=Bacau')">Geolocation Test</a>
+            <br><br><a onClick="app.openNativeAppWindow('geo:0,0?q=34.99,-106.61(Treasure)')">longitude & latitude with a string label</a>
+            <br><br><a onClick="app.openNativeAppWindow('geo:0,0?q=1600+lodz+biedronka')">street address Test</a>
 	
 </body>
 </html>

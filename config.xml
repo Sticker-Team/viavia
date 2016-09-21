@@ -4,7 +4,8 @@
   <icon src="www/images/viavia_logo.png"/>
   <author href="" email="teamsticker@gmail.com">Team Sticker</author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <!-- <access origin="*"/>  -->
+  <access origin="geo:*" launch-external="yes"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
   <!-- <preference name="orientation" value="landscape" /> -->
