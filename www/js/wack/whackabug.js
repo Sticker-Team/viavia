@@ -18,7 +18,7 @@ var whackamole = whackamole || (function(window, undefined) {
 		deadClass = "wam-pesky-mole-dead",
 		hidingInterval = 1500,
 		poppingInterval = 750,
-		moleLimit = 10;
+		moleLimit = 1;
 		
 	// utility function 
 	function getStyle(el, cssprop){
